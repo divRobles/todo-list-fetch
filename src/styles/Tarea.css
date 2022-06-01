@@ -1,0 +1,39 @@
+.container-tarea {
+    background-color: rgb(255, 94, 94);
+    min-height: 100px;
+    width: 80%;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.texto-tarea {
+    width: 90%;
+    text-align: justify;
+}
+
+.container-icono-tarea {
+    height: 100%;
+    width: 1rem;
+}
+
+.icono-tarea {
+    height: 1rem;
+}
+
+.estaCompletada {
+    background-color: rgb(115, 255, 59);
+}
+
+.tarea-row {
+    width: 100%;
+    flex-wrap: nowrap;
+    margin: 0;
+}
+
+.col-1 {
+    padding: 0;
+}

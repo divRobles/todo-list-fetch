@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container-img-cabecera {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url('https://storage.googleapis.com/4geeks-academy-website/blog/2016/04/logo1-01-02.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 20vh;
+    width: 90%;
+    margin: 3% auto;
+}
+
+
+.container-img-cabecera * {
+    padding: 30px;
+}
+
+.container-lista-tareas,
+.container-lista-tareas * {
+    border-radius: 20px;
+}
+
+.container-lista-tareas {
+    background-color: #528CC6;
+    width: 70%;
+    min-height: 16vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    margin-top: 2%;
+}
