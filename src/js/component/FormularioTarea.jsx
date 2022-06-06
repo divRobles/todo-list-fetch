@@ -8,6 +8,8 @@ const FormularioTarea = (props) => {
 
 	const esCribiendoInput = (e) => {
 		setTexto(e.target.value);
+	};
+	const enviarConEnter = (e) => {
 		if (e.key === "Enter") {
 			enviarTarea();
 		}
@@ -31,7 +33,8 @@ const FormularioTarea = (props) => {
 						type="text"
 						className="input-tarea"
 						placeholder="Escribe lo que no vas a hacer"
-						onKeyDown={esCribiendoInput}
+						onChange={esCribiendoInput}
+						onKeyDown={enviarConEnter}
 					/>
 				</div>
 
