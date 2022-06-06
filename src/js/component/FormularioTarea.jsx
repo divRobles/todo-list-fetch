@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import uniqid from "uniqid";
 
-const FormularioTarea = (props) => {
+const FormularioTarea = ({ onChange, tareasImportadas }) => {
 	const input = document.querySelector(".input-tarea");
 
+	// const [tareasImport, setTareasImport] = useState(tareasImportadas);
 	const [textoTarea, setTexto] = useState("");
 
 	const esCribiendoInput = (e) => {
@@ -21,9 +22,11 @@ const FormularioTarea = (props) => {
 			completada: false,
 		};
 		setTexto((texto) => (texto = ""));
-		props.onChange(tareaNueva);
+		onChange(tareaNueva);
 		input.value = "";
 	};
+
+	// setTexto(hola);
 
 	return (
 		<div className="row d-flex justify-content-center w-100 p-0">

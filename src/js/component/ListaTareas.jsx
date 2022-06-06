@@ -1,27 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import Tarea from "./Tarea.jsx";
 import FormularioTarea from "./FormularioTarea.jsx";
 
-const ListaTareas = () => {
+import uniqid from "uniqid";
+
+const ListaTareas = ({ tareasImportadas }) => {
 	const [tareas, setTareas] = useState([]);
 
+	console.log("tareasImportadas", tareasImportadas);
+
+	const enviarTareasImportadas = tareasImportadas.map((tarea) => {
+		let tareaNueva = {
+			id: uniqid("tarea-"),
+			texto: tarea,
+			completada: false,
+		};
+	});
+
 	const publicarTarea = (tarea) => {
-		console.log(tarea);
 		if (tarea.texto && tarea.texto.trim()) {
 			setTareas([tarea, ...tareas]);
 		}
-		console.log(tarea);
 	};
 
 	const eliminarTareaa = (id) => {
 		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
 		setTareas(tareasActualizadass);
-		console.log(tareasActualizadass);
 
 		setTareas(tareas.filter((tarea) => tarea.id !== id));
-		console.log(tareas.filter((tarea) => console.log(tarea.id, id, "eh")));
-		console.log(tareas);
 	};
 
 	const completar = (id) => {
@@ -37,7 +44,9 @@ const ListaTareas = () => {
 	return (
 		<>
 			<div className="container-componente-formulario">
-				<FormularioTarea onChange={publicarTarea}></FormularioTarea>
+				<FormularioTarea
+					// tareasImportadas={tareasImportadas}
+					onChange={publicarTarea}></FormularioTarea>
 			</div>
 			<div className="container-componente-tarea">
 				{tareas.map((tarea) => (
@@ -50,6 +59,28 @@ const ListaTareas = () => {
 						completarTarea={completar}
 					/>
 				))}
+				{/* {enviarTareasImportadas.map((tarea) => {
+					return (
+						<Tarea
+							key={uniqid("tarea-")}
+							id={uniqid("tarea-")}
+							texto={tarea.texto}
+							estaCompletada={tarea.completada}
+							eliminar={eliminarTareaa}
+							completarTarea={completar}
+						/>
+					);
+				})} */}
+				{/* {tareasImportadas.map((tarea) => (
+					<Tarea
+						key={uniqid("tarea-")}
+						id={uniqid("tarea-")}
+						texto={tarea}
+						estaCompletada={false}
+						eliminar={eliminarTareaa}
+						completarTarea={completar}
+					/>
+				))} */}
 			</div>
 		</>
 	);
