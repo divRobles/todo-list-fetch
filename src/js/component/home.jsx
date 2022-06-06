@@ -6,6 +6,7 @@ import "../../styles/Home.css";
 
 const Home = () => {
 	const [tareasFetch, setTareasFetch] = useState([]);
+	const [tareas, setTareas] = useState([]);
 
 	useEffect(() => {
 		//codigo que voy a ejecutar
@@ -17,6 +18,7 @@ const Home = () => {
 			.then((data) => {
 				data = data.map((tarea) => tarea.label);
 				setTareasFetch(data);
+				setTareas(data);
 			});
 	}, []);
 
@@ -34,10 +36,31 @@ const Home = () => {
 			.then((resp) => resp.json())
 			.then((data) => {
 				console.log(data);
-				// data = data.map((tarea) => tarea.label);
-				setTareasFetch(data);
 			});
 	}, []);
+
+	const publicarTarea = (tarea) => {
+		if (tarea.texto && tarea.texto.trim()) {
+			setTareas([tarea, ...tareas]);
+		}
+	};
+
+	const eliminarTarea = (id) => {
+		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
+		setTareas(tareasActualizadass);
+
+		setTareas(tareas.filter((tarea) => tarea.id !== id));
+	};
+
+	const completar = (id) => {
+		const tareasActualizadas = tareas.map((tarea) => {
+			if (tarea.id === id) {
+				tarea.estaCompletada = !tarea.estaCompletada;
+			}
+			return tarea;
+		});
+		setTareas((tarea) => (tarea = tareasActualizadas));
+	};
 
 	return (
 		<div className="App">
@@ -45,7 +68,13 @@ const Home = () => {
 
 			<div className="container-lista-tareas">
 				{/* <ListaTareas></ListaTareas> */}
-				<ListaTareas tareasImportadas={tareasFetch}></ListaTareas>
+				<ListaTareas
+					tareas={tareas}
+					tareasImportadas={tareasFetch}
+					publicar={publicarTarea}
+					eliminar={eliminarTarea}
+					completar={completar}
+				/>
 			</div>
 		</div>
 	);

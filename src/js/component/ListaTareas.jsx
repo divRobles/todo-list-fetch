@@ -5,48 +5,50 @@ import FormularioTarea from "./FormularioTarea.jsx";
 
 import uniqid from "uniqid";
 
-const ListaTareas = ({ tareasImportadas }) => {
-	const [tareas, setTareas] = useState([]);
+const ListaTareas = ({
+	tareas,
+	tareasImportadas,
+	publicar,
+	eliminar,
+	completar,
+}) => {
+	// const [tareas, setTareas] = useState([]);
 
-	console.log("tareasImportadas", tareasImportadas);
+	// const enviarTareasImportadas = tareasImportadas.map((tarea) => {
+	// 	let tareaNueva = {
+	// 		id: uniqid("tarea-"),
+	// 		texto: tarea,
+	// 		completada: false,
+	// 	};
+	// });
 
-	const enviarTareasImportadas = tareasImportadas.map((tarea) => {
-		let tareaNueva = {
-			id: uniqid("tarea-"),
-			texto: tarea,
-			completada: false,
-		};
-	});
+	// const publicarTarea = (tarea) => {
+	// 	if (tarea.texto && tarea.texto.trim()) {
+	// 		setTareas([tarea, ...tareas]);
+	// 	}
+	// };
 
-	const publicarTarea = (tarea) => {
-		if (tarea.texto && tarea.texto.trim()) {
-			setTareas([tarea, ...tareas]);
-		}
-	};
+	// const eliminarTareaa = (id) => {
+	// 	const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
+	// 	setTareas(tareasActualizadass);
 
-	const eliminarTareaa = (id) => {
-		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
-		setTareas(tareasActualizadass);
+	// 	setTareas(tareas.filter((tarea) => tarea.id !== id));
+	// };
 
-		setTareas(tareas.filter((tarea) => tarea.id !== id));
-	};
-
-	const completar = (id) => {
-		const tareasActualizadas = tareas.map((tarea) => {
-			if (tarea.id === id) {
-				tarea.estaCompletada = !tarea.estaCompletada;
-			}
-			return tarea;
-		});
-		setTareas((tarea) => (tarea = tareasActualizadas));
-	};
+	// const completar = (id) => {
+	// 	const tareasActualizadas = tareas.map((tarea) => {
+	// 		if (tarea.id === id) {
+	// 			tarea.estaCompletada = !tarea.estaCompletada;
+	// 		}
+	// 		return tarea;
+	// 	});
+	// 	setTareas((tarea) => (tarea = tareasActualizadas));
+	// };
 
 	return (
 		<>
 			<div className="container-componente-formulario">
-				<FormularioTarea
-					// tareasImportadas={tareasImportadas}
-					onChange={publicarTarea}></FormularioTarea>
+				<FormularioTarea publicar={publicar}></FormularioTarea>
 			</div>
 			<div className="container-componente-tarea">
 				{tareas.map((tarea) => (
@@ -55,7 +57,7 @@ const ListaTareas = ({ tareasImportadas }) => {
 						id={tarea.id}
 						texto={tarea.texto}
 						estaCompletada={tarea.estaCompletada}
-						eliminar={eliminarTareaa}
+						eliminar={eliminar}
 						completarTarea={completar}
 					/>
 				))}

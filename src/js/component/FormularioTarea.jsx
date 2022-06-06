@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import uniqid from "uniqid";
 
-const FormularioTarea = ({ onChange, tareasImportadas }) => {
+const FormularioTarea = ({ publicar, tareasImportadas }) => {
 	const input = document.querySelector(".input-tarea");
 
 	// const [tareasImport, setTareasImport] = useState(tareasImportadas);
@@ -22,7 +22,7 @@ const FormularioTarea = ({ onChange, tareasImportadas }) => {
 			completada: false,
 		};
 		setTexto((texto) => (texto = ""));
-		onChange(tareaNueva);
+		publicar(tareaNueva);
 		input.value = "";
 	};
 
