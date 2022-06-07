@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 
 const FormularioTarea = ({ publicar, tareasImportadas }) => {
 	const input = document.querySelector(".input-tarea");
 
-	// const [tareasImport, setTareasImport] = useState(tareasImportadas);
 	const [textoTarea, setTexto] = useState("");
 
 	const esCribiendoInput = (e) => {
@@ -15,11 +14,12 @@ const FormularioTarea = ({ publicar, tareasImportadas }) => {
 			enviarTarea();
 		}
 	};
+
 	const enviarTarea = (e) => {
 		const tareaNueva = {
 			id: uniqid(`tarea-`),
-			texto: textoTarea,
-			completada: false,
+			label: textoTarea,
+			done: false,
 		};
 		setTexto((texto) => (texto = ""));
 		publicar(tareaNueva);

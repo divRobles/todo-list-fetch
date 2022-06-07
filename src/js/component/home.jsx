@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react";
 // import Foto4Geeks from "../src/imgs/Foto4Geeks.png";
 import ListaTareas from "./ListaTareas.jsx";
 import "../../styles/Home.css";
+import uniqid from "uniqid";
 //create your first component
 
 const Home = () => {
 	const [tareasFetch, setTareasFetch] = useState([]);
 	const [tareas, setTareas] = useState([]);
+	const [tareas2, setTareas2] = useState([]);
 
 	useEffect(() => {
-		//codigo que voy a ejecutar
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
 			method: "GET",
 			ContentType: "application/json",
@@ -17,10 +18,23 @@ const Home = () => {
 			.then((resp) => resp.json())
 			.then((data) => {
 				data = data.map((tarea) => tarea.label);
-				setTareasFetch(data);
+				data = data.map((tarea) => {
+					tarea = {
+						id: uniqid("tarea-"),
+						label: tarea,
+						done: false,
+					};
+					return tarea;
+				});
 				setTareas(data);
 			});
 	}, []);
+
+	let e = { id: "ijiji", label: "aprender a usar la vida", done: false };
+	let a = tareas.map((tareas) => tareas);
+
+	console.log("a", a);
+	console.log("e", e);
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
@@ -31,6 +45,8 @@ const Home = () => {
 			body: JSON.stringify([
 				{ label: "aprender a usar React", done: false },
 				{ label: "aprender a usar Fetch", done: false },
+				{ label: "aprender a usar la vida", done: false },
+				a,
 			]),
 		})
 			.then((resp) => resp.json())
@@ -39,8 +55,10 @@ const Home = () => {
 			});
 	}, []);
 
+	console.log("oi", a);
+
 	const publicarTarea = (tarea) => {
-		if (tarea.texto && tarea.texto.trim()) {
+		if (tarea.label && tarea.label.trim()) {
 			setTareas([tarea, ...tareas]);
 		}
 	};
@@ -48,14 +66,13 @@ const Home = () => {
 	const eliminarTarea = (id) => {
 		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
 		setTareas(tareasActualizadass);
-
 		setTareas(tareas.filter((tarea) => tarea.id !== id));
 	};
 
 	const completar = (id) => {
 		const tareasActualizadas = tareas.map((tarea) => {
 			if (tarea.id === id) {
-				tarea.estaCompletada = !tarea.estaCompletada;
+				tarea.done = !tarea.done;
 			}
 			return tarea;
 		});

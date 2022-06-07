@@ -2,19 +2,17 @@ import React from "react";
 import { AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
 import { useEffect } from "react";
 
-function Tarea({ id, texto, estaCompletada, eliminar, completarTarea }) {
+function Tarea({ id, label, done, eliminar, completarTarea }) {
 	return (
 		<div
 			className={
-				estaCompletada
-					? `container-tarea estaCompletada`
-					: `container-tarea`
+				done ? `container-tarea estaCompletada` : `container-tarea`
 			}
 			id={id}>
 			<div className="container">
 				<div className="row tarea-row">
 					<div className="col-8 col-lg-10">
-						<div className="texto-tarea">{texto}</div>
+						<div className="texto-tarea">{label}</div>
 					</div>
 					<div className="col-2 col-lg-1">
 						<div
