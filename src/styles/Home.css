@@ -38,3 +38,9 @@
     margin: auto;
     margin-top: 2%;
 }
+
+.borrar {
+    height: 100px;
+    width: 100px;
+    background-color: #528CC6;
+}

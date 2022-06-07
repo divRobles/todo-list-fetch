@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import ListaTareas from "./ListaTareas.jsx";
 import "../../styles/Home.css";
 import uniqid from "uniqid";
+import { func } from "prop-types";
 //create your first component
 
 const Home = () => {
@@ -29,12 +30,17 @@ const Home = () => {
 				setTareas(data);
 			});
 	}, []);
+	console.log(tareas);
 
-	let e = { id: "ijiji", label: "aprender a usar la vida", done: false };
-	let a = tareas.map((tareas) => tareas);
-
-	console.log("a", a);
-	console.log("e", e);
+	useEffect(() => {
+		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: [],
+		});
+	}, []);
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
@@ -43,19 +49,17 @@ const Home = () => {
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify([
-				{ label: "aprender a usar React", done: false },
-				{ label: "aprender a usar Fetch", done: false },
-				{ label: "aprender a usar la vida", done: false },
-				a,
+				{ label: "Make the bed", done: false },
+				{ label: "Walk the dog", done: false },
+				{ label: "Do the replits", done: false },
+				...tareas,
 			]),
 		})
 			.then((resp) => resp.json())
 			.then((data) => {
 				console.log(data);
 			});
-	}, []);
-
-	console.log("oi", a);
+	}, [tareas]);
 
 	const publicarTarea = (tarea) => {
 		if (tarea.label && tarea.label.trim()) {
@@ -79,8 +83,14 @@ const Home = () => {
 		setTareas((tarea) => (tarea = tareasActualizadas));
 	};
 
+	const borrar = () => {
+		console.log("Ijiji");
+		setTareas([]);
+	};
+
 	return (
 		<div className="App">
+			<div className="borrar" onClick={borrar}></div>
 			<div className="container-img-cabecera"></div>
 
 			<div className="container-lista-tareas">
