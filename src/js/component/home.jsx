@@ -68,7 +68,7 @@ const Home = () => {
 			setTareas([tarea, ...tareas]);
 		}
 	};
-	// console.log("iji");
+
 	const eliminarTarea = (id) => {
 		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
 		setTareas(tareasActualizadass);
