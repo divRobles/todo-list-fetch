@@ -5,13 +5,7 @@ import FormularioTarea from "./FormularioTarea.jsx";
 
 import uniqid from "uniqid";
 
-const ListaTareas = ({
-	tareas,
-	tareasImportadas,
-	publicar,
-	eliminar,
-	completar,
-}) => {
+const ListaTareas = ({ tareas, publicar, eliminar, completar }) => {
 	return (
 		<>
 			<div className="container-componente-formulario">

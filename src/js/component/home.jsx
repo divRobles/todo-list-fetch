@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from "react";
 // import Foto4Geeks from "../src/imgs/Foto4Geeks.png";
 import ListaTareas from "./ListaTareas.jsx";
+import BotonBorrar from "./BotonBorrar.jsx";
 import "../../styles/Home.css";
 import uniqid from "uniqid";
-import { func } from "prop-types";
-//create your first component
+import { AiOutlineDelete } from "react-icons/ai";
 
 const Home = () => {
-	const [tareasFetch, setTareasFetch] = useState([]);
+	// Estados: tareas y estado para saber si se ha borrado el servidor.
+
 	const [tareas, setTareas] = useState([]);
-	const [tareas2, setTareas2] = useState([]);
+	const [borrado, setBorrado] = useState(false);
+
+	// Fetch API.
 
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
@@ -30,16 +33,19 @@ const Home = () => {
 				setTareas(data);
 			});
 	}, []);
-	console.log(tareas);
 
 	useEffect(() => {
+		console.log("post");
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
 			method: "POST",
+			body: JSON.stringify([]),
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: [],
-		});
+		})
+			.then((res) => res.json())
+			.catch((error) => console.error("Error:", error))
+			.then((response) => console.log("Success:", response));
 	}, []);
 
 	useEffect(() => {
@@ -48,18 +54,17 @@ const Home = () => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify([
-				{ label: "Make the bed", done: false },
-				{ label: "Walk the dog", done: false },
-				{ label: "Do the replits", done: false },
-				...tareas,
-			]),
+			body: JSON.stringify([...tareas]),
 		})
 			.then((resp) => resp.json())
 			.then((data) => {
 				console.log(data);
 			});
 	}, [tareas]);
+
+	// Fin Fetch API.
+
+	// Funciones tareas: publicar, eliminar (solo una), completarla (tarea.done = true), borrar lista completa.
 
 	const publicarTarea = (tarea) => {
 		if (tarea.label && tarea.label.trim()) {
@@ -83,25 +88,43 @@ const Home = () => {
 		setTareas((tarea) => (tarea = tareasActualizadas));
 	};
 
-	const borrar = () => {
-		console.log("Ijiji");
-		setTareas([]);
+	const borrarLista = () => {
+		setBorrado(!borrado);
+		console.log(borrado);
+		borrado || setTareas([]);
 	};
+
+	// Fin funciones tareas.
 
 	return (
 		<div className="App">
-			<div className="borrar" onClick={borrar}></div>
 			<div className="container-img-cabecera"></div>
 
-			<div className="container-lista-tareas">
-				{/* <ListaTareas></ListaTareas> */}
-				<ListaTareas
-					tareas={tareas}
-					tareasImportadas={tareasFetch}
-					publicar={publicarTarea}
-					eliminar={eliminarTarea}
-					completar={completar}
-				/>
+			{/* Condición para borrar lista del servidor */}
+			{borrado ? <BotonBorrar tareas={tareas} /> : null}
+
+			{/* Div basura y lista de tareas  */}
+			<div className="basura-y-lista">
+				<div className="row">
+					{/* Basura */}
+					<div className="col-1 columna-borrar-servidor">
+						<div className="borrar" onClick={borrarLista}>
+							<AiOutlineDelete className="icono-borrar-todo" />
+						</div>
+					</div>
+
+					{/* Lista de tareas */}
+					<div className="col-11 columna-añadir-tarea">
+						<div className="container-lista-tareas">
+							<ListaTareas
+								tareas={tareas}
+								publicar={publicarTarea}
+								eliminar={eliminarTarea}
+								completar={completar}
+							/>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

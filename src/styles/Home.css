@@ -29,7 +29,7 @@
 
 .container-lista-tareas {
     background-color: #528CC6;
-    width: 70%;
+    width: 100%;
     min-height: 16vh;
     padding: 20px;
     display: flex;
@@ -39,8 +39,18 @@
     margin-top: 2%;
 }
 
+.columna-borrar-servidor, .columna-añadir-tarea{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2%;
+}
+
 .borrar {
-    height: 100px;
     width: 100px;
-    background-color: #528CC6;
+}
+
+.icono-borrar-todo{
+    height: 100%;
+    width: 100%;
 }
