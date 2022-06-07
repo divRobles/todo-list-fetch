@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import Tarea from "./Tarea.jsx";
 import FormularioTarea from "./FormularioTarea.jsx";
-
-import uniqid from "uniqid";
 
 const ListaTareas = ({ tareas, publicar, eliminar, completar }) => {
 	return (
