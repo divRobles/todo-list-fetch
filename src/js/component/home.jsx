@@ -35,7 +35,6 @@ const Home = () => {
 	}, []);
 
 	useEffect(() => {
-		console.log("post");
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
 			method: "POST",
 			body: JSON.stringify([]),
@@ -44,8 +43,8 @@ const Home = () => {
 			},
 		})
 			.then((res) => res.json())
-			.catch((error) => console.error("Error:", error))
-			.then((response) => console.log("Success:", response));
+			.catch()
+			.then();
 	}, []);
 
 	useEffect(() => {
@@ -57,9 +56,7 @@ const Home = () => {
 			body: JSON.stringify([...tareas]),
 		})
 			.then((resp) => resp.json())
-			.then((data) => {
-				console.log(data);
-			});
+			.then((data) => {});
 	}, [tareas]);
 
 	// Fin Fetch API.
@@ -71,7 +68,7 @@ const Home = () => {
 			setTareas([tarea, ...tareas]);
 		}
 	};
-	console.log("iji");
+	// console.log("iji");
 	const eliminarTarea = (id) => {
 		const tareasActualizadass = tareas.filter((tarea) => tarea.id !== id);
 		setTareas(tareasActualizadass);
