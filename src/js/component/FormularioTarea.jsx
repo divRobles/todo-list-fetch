@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import uniqid from "uniqid";
 
-const FormularioTarea = ({ publicar, tareasImportadas }) => {
+const FormularioTarea = ({ publicar }) => {
 	const input = document.querySelector(".input-tarea");
 
 	const [textoTarea, setTexto] = useState("");
@@ -25,8 +25,6 @@ const FormularioTarea = ({ publicar, tareasImportadas }) => {
 		publicar(tareaNueva);
 		input.value = "";
 	};
-
-	// setTexto(hola);
 
 	return (
 		<div className="row d-flex justify-content-center w-100 p-0">

@@ -1,6 +1,5 @@
 import React from "react";
 import { AiOutlineDelete, AiOutlineCheck } from "react-icons/ai";
-import { useEffect } from "react";
 
 function Tarea({ id, label, done, eliminar, completarTarea }) {
 	return (
