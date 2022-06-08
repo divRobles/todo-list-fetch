@@ -1,4 +1,5 @@
 // import React, { useEffect } from "react";
+// Hola
 
 const BotonBorrar = ({ tareas }) => {
 	useEffect(() => {
