@@ -1,8 +1,7 @@
 // import React, { useEffect } from "react";
-// Hola
-fwriodhwoqihoq
-fefo`fjwepoeso`
-dsidj
+
+ALBERTOOO
+
 const BotonBorrar = ({ tareas }) => {
 	useEffect(() => {
 		fetch("https://assets.breatheco.de/apis/fake/todos/user/Jesus2", {
